@@ -34,13 +34,11 @@ jobs:
 
       - name: Checkout APISIX code
         run: |
-          git clone https://github.com/apache/apisix.git && cd apisix
-          pwd
+          git clone https://github.com/apache/apisix.git
 
       - name: Build image
         run: |
           cd apisix
-          pwd
           tag="apache/apisix:$APISIX_IMAGE_TAG"
           docker build -t $tag -f ../debian-dev/Dockerfile.local  .
           
