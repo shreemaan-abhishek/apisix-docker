@@ -57,10 +57,12 @@ jobs:
         run: |
           cd apisix
           pwd
-          export APISIX_IMAGE_TAG=${{ format('{0}-{1}', env.APISIX_VERSION, matrix.platform) }}
+          APISIX_IMAGE_TAG=${{ format('{0}-{1}', env.APISIX_VERSION, matrix.platform) }}
           docker build -t $APISIX_IMAGE_TAG -f ../debian-dev/Dockerfile.local  .
           
       - name: use docker-compose
+        env:
+          APISIX_IMAGE_TAG: ${{ format('{0}-{1}', env.APISIX_VERSION, matrix.platform) }}
         run: docker-compose -p docker-apisix -f example/docker-compose.yml up -d
 
       - name: Test APISIX
