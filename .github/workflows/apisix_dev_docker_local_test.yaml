@@ -1,4 +1,4 @@
-name: Docker compose CI for example
+name: CI for docker image built from local source code
 
 on:
   schedule:
