@@ -15,7 +15,7 @@ on:
 
 env:
   APISIX_VERSION: "3.3.0"
-  APISIX_IMAGE_TAG: "apisix-local"
+  APISIX_IMAGE_TAG: "local"
 
 jobs:
   prepare:
@@ -58,7 +58,8 @@ jobs:
         run: |
           cd apisix
           pwd
-          docker build -t $APISIX_IMAGE_TAG -f ../debian-dev/Dockerfile.local  .
+          tag="apisix:$APISIX_IMAGE_TAG"
+          docker build -t $tag -f ../debian-dev/Dockerfile.local  .
           
       - name: use docker-compose
         run: docker-compose -p docker-apisix -f example/docker-compose.yml up -d
