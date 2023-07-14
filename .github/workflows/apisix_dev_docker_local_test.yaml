@@ -14,29 +14,13 @@ on:
       - 'release/apisix-2.15.**'
 
 env:
-  APISIX_VERSION: "3.3.0"
   APISIX_IMAGE_TAG: "local"
 
 jobs:
-  prepare:
-    runs-on: ubuntu-latest
-    
-    steps:
-      - name: Set apisix version
-        id: apisix
-        run: |
-          branch=${{ github.base_ref }}
-          apisix_version=$( (echo ${branch} | grep -Po '\d*\.\d*\.\d*') || echo ${APISIX_VERSION} )
-          echo "version=${apisix_version}" >> $GITHUB_OUTPUT
-
-    outputs:
-      apisix-version: ${{ steps.apisix.outputs.version }}
 
   build:
     runs-on: ubuntu-latest
     needs: prepare
-    env:
-      APISIX_VERSION: ${{ needs.prepare.outputs.apisix-version }}
 
     strategy:
       fail-fast: false
