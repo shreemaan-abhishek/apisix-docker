@@ -51,11 +51,14 @@ jobs:
       - name: Checkout APISIX code
         run: |
           git clone https://github.com/apache/apisix.git && cd apisix
+          pwd
 
       - name: Build image
         env:
           APISIX_IMAGE_TAG: ${{ format('{0}-{1}', env.APISIX_VERSION, matrix.platform) }}
         run: |
+          cd apisix
+          pwd
           docker build -t $APISIX_IMAGE_TAG -f debian-dev/Dockerfile.local  .
           
       - name: use docker-compose
