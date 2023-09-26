@@ -1,15 +1,7 @@
 name: Build and Push apisix-dev to Docker DockerHub
 
-
 on:
-  schedule:
-    # UTC 0:00 AM (See https://pubs.opengroup.org/onlinepubs/9699919799/utilities/crontab.html#tag_20_25_07)
-    - cron: "0 1 * * *"
-  push:
-    branches: [master]
-    paths-ignore:
-      - 'docs/**'
-      - '**/*.md'
+  pull_request:
 
 jobs:
   build:
@@ -68,7 +60,9 @@ jobs:
           make push-multiarch-dev-on-debian
 
       - name: Run Trivy vulnerability scanner
+        id: trivy
         uses: aquasecurity/trivy-action@master
         with:
           image-ref: 'apache/apisix:${{ APISIX_DOCKER_TAG }}'
           severity: 'CRITICAL,HIGH'
+      
