@@ -56,10 +56,6 @@ jobs:
       - name: Set up Docker Buildx
         uses: docker/setup-buildx-action@v1
 
-      - name: Push apisix image to Docker Hub
-        run: |
-          make push-multiarch-dev-on-debian
-
       - name: Run Trivy vulnerability scanner
         id: trivy
         uses: aquasecurity/trivy-action@master
