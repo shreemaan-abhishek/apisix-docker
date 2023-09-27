@@ -54,6 +54,6 @@ jobs:
         id: trivy
         uses: aquasecurity/trivy-action@master
         with:
-          image-ref: 'apache/apisix:$APISIX_DOCKER_TAG'
+          image-ref: 'apache/apisix:${{ env.APISIX_DOCKER_TAG }}'
           severity: 'CRITICAL,HIGH'
       
