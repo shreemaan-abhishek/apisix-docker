@@ -2,6 +2,7 @@ name: Build and Push apisix-dev to Docker DockerHub
 
 on:
   pull_request:
+    types: [opened, reopened]
 
 jobs:
   build:
