@@ -56,4 +56,27 @@ jobs:
         with:
           image-ref: 'apache/apisix:${{ env.APISIX_DOCKER_TAG }}'
           severity: 'CRITICAL,HIGH'
-      
+
+      - name: Run Trivy vulnerability scanner
+        id: trivy
+        uses: aquasecurity/trivy-action@master
+        with:
+          image-ref: 'apache/apisix:${{ env.APISIX_DOCKER_TAG }}'
+          severity: 'CRITICAL,HIGH'
+          format: 'github'
+
+      - name: Run Trivy vulnerability scanner
+        id: trivy
+        uses: aquasecurity/trivy-action@master
+        with:
+          image-ref: 'apache/apisix:${{ env.APISIX_DOCKER_TAG }}'
+          severity: 'CRITICAL,HIGH'
+          format: 'json'
+
+      - name: Run Trivy vulnerability scanner
+        id: trivy
+        uses: aquasecurity/trivy-action@master
+        with:
+          image-ref: 'apache/apisix:${{ env.APISIX_DOCKER_TAG }}'
+          severity: 'CRITICAL,HIGH'
+          format: 'sarif'
