@@ -14,7 +14,7 @@ on:
       - 'release/apisix-2.15.**'
 
 env:
-  APISIX_VERSION: "3.9.0"
+  APISIX_VERSION: "3.10.0"
 
 jobs:
   prepare:
@@ -47,10 +47,14 @@ jobs:
     steps:
       - uses: actions/checkout@v2
 
+      - name: Setup tmate session
+        if: matrix.platform == 'redhat'
+        uses: mxschmitt/action-tmate@v3
+
       - name: Build image
         run: |
           make build-on-${{ matrix.platform }}
-          
+
       - name: use docker-compose
         env:
           APISIX_IMAGE_TAG: ${{ format('{0}-{1}', env.APISIX_VERSION, matrix.platform) }}
