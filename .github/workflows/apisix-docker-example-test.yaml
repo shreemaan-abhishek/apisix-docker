@@ -47,13 +47,13 @@ jobs:
     steps:
       - uses: actions/checkout@v2
 
-      - name: Build image
-        run: |
-          make build-on-${{ matrix.platform }}
-
       - name: Setup tmate session
         if: matrix.platform == 'redhat'
         uses: mxschmitt/action-tmate@v3
+
+      - name: Build image
+        run: |
+          make build-on-${{ matrix.platform }}
 
       - name: use docker-compose
         env:
