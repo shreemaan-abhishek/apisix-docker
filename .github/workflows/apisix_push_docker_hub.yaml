@@ -73,6 +73,5 @@ jobs:
           make push-multiarch-on-latest
 
       - name: Push apisix:${{ matrix.os }} image to Docker Hub
-        if: ${{ startsWith(github.ref_name, 'release/apisix') }}
         run: |
           make push-multiarch-on-${{ matrix.platform }}
